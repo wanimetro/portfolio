@@ -197,7 +197,6 @@ dialog::backdrop{background:rgba(10,12,14,.55);backdrop-filter:blur(3px)}
           <button type="button" data-f="backend" aria-pressed="false">Backend</button>
           <button type="button" data-f="xr" aria-pressed="false">XR / Interactive</button>
           <button type="button" data-f="planning" aria-pressed="false">Planning</button>
-          <button type="button" data-f="research" aria-pressed="false">Research</button>
         </div>
       </div>
       <div class="grid" id="grid"></div>
@@ -364,17 +363,6 @@ const projects = [
    outcome:'🏆 Won Best Technical Project.<br>With only 48 hours, we focused on defining the problem quickly and committing to one clear solution. Working across languages and cultures, I learned that what matters most is framing the problem clearly and aligning everyone around the value users will actually feel. I also saw that building the MVP around a few core features, prioritized by the user flow, makes a service feel more complete than trying to build every idea.',
    video:'media/lookitup-demo.mp4', images:['img/lookitup/results.jpg'],
    links:[{label:'GitHub', url:'https://github.com/wanimetro/Lookitup'},{label:'Pitch deck (PDF)', url:'media/lookitup-presentation.pdf'}]},
-  {id:'lab', cat:['research','xr'], title:'ICILab Research', year:'2026 –', art:'lab', cover:'',
-   status:['Ongoing','wip'], tags:['Undergraduate Researcher','XR','HCI'],
-   short:'Undergraduate research at the Immersive Computing & Interaction Lab on interaction techniques in XR.',
-   type:'Immersive Computing & Interaction Lab, Kyung Hee University', team:'', role:'Undergraduate Researcher',
-   stack:'<span class="tbd">TBD</span>',
-   problem:'', points:['Research topic <span class="tbd">TBD</span>'], outcome:'',
-   video:'', images:[], links:[]}
-];
-
-/* 준비 중 — 자료가 생기면 위 projects 배열로 옮기세요 */
-const drafts = [
   {id:'xreal', cat:['xr'], title:'XREAL Project', year:'2026', art:'xreal', cover:'',
    status:['In progress','wip'], tags:['XREAL','XR','Unity'],
    short:'An XR piece made at XREAL, now being developed into a full portfolio work.',
@@ -386,6 +374,13 @@ const drafts = [
    short:'A VR game built for the Virtual Reality course, polished as a portfolio piece.',
    type:'Virtual Reality course · Kyung Hee University', team:'', role:'<span class="tbd">TBD</span>', stack:'Unity <span class="tbd">TBD</span>',
    problem:'', points:['Core interaction <span class="tbd">TBD</span>'], outcome:'',
+   video:'', images:[], links:[]},
+  {id:'lab', cat:['xr'], title:'ICILab Research', year:'2026 –', art:'lab', cover:'',
+   status:['Ongoing','wip'], tags:['Undergraduate Researcher','XR','HCI'],
+   short:'Undergraduate research at the Immersive Computing & Interaction Lab on interaction techniques in XR.',
+   type:'Immersive Computing & Interaction Lab, Kyung Hee University', team:'', role:'Undergraduate Researcher',
+   stack:'<span class="tbd">TBD</span>',
+   problem:'', points:['Research topic <span class="tbd">TBD</span>'], outcome:'',
    video:'', images:[], links:[]}
 ];
 
