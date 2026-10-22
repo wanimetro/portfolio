@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sowon Oh — Portfolio</title>
+<meta name="description" content="Sowon Oh — Computer Science × Immersive Media student building interactive and immersive experiences.">
+<meta property="og:title" content="Sowon Oh — Portfolio">
+<meta property="og:description" content="Interactive and immersive experiences across frontend, backend and XR.">
+<meta property="og:image" content="portrait.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single centered column (max 1120px); light-trail canvas hero, filterable 2-col project grid, list-style experience, 4-col skills, oversized name footer. */
+:root{
+  --bg:#F3F4F0; --surface:#FFFFFF; --fg:#131517; --muted:#676C66; --line:#DCDFD8;
+  --accent:#2E4FE6; --glow:#FF7A3D; --thumb:#E7E9E3; --thumb-ink:#C9CDC4;
+  --ok:#1F8A4C; --wip:#B7791F;
+  --f-display:"Bricolage Grotesque", "IBM Plex Sans KR", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans KR", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F1113; --surface:#171A1D; --fg:#ECEEEA; --muted:#9298A0; --line:#2A2E33;
+  --accent:#7D95FF; --glow:#FF8F57; --thumb:#1D2125; --thumb-ink:#343A40;
+  --ok:#5BC98A; --wip:#E3B05C; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0F1113; --surface:#171A1D; --fg:#ECEEEA; --muted:#9298A0; --line:#2A2E33;
+  --accent:#7D95FF; --glow:#FF8F57; --thumb:#1D2125; --thumb-ink:#343A40;
+  --ok:#5BC98A; --wip:#E3B05C; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;font-weight:600;letter-spacing:-.02em}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font-family:var(--f-display);font-weight:800;font-size:18px;text-decoration:none;letter-spacing:-.02em}
+.nav nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav nav a{text-decoration:none;font-size:14px;padding:6px 10px;border-radius:999px;color:var(--muted)}
+.nav nav a:hover{color:var(--fg);background:var(--surface)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#trail{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .wrap{position:relative;padding-block:clamp(64px,12vw,140px) clamp(48px,8vw,96px);pointer-events:none}
+.hero .hello{font-family:var(--f-display);font-size:clamp(22px,3vw,30px);color:var(--muted);font-weight:400}
+.hero h1{font-size:clamp(56px,13vw,168px);line-height:.92;font-weight:800;letter-spacing:-.045em;margin-top:6px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.thesis{max-width:34ch;font-size:clamp(17px,2vw,21px);margin:28px 0 0;line-height:1.5}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;pointer-events:auto}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
+.hint{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:16px;font-family:var(--f-mono);font-size:11px;color:var(--muted);pointer-events:none}
+
+section{padding-block:clamp(64px,9vw,112px)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
+.sec-head h2{font-size:clamp(34px,5vw,56px);line-height:1}
+
+/* filters */
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{font:500 14px var(--f-body);color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
+.filters button:hover{color:var(--fg)}
+.filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,36px) clamp(16px,2.4vw,28px)}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.card{position:relative;display:flex;flex-direction:column;gap:14px;min-width:0;margin:0}
+.card[hidden]{display:none}
+.card-open{all:unset;cursor:pointer}
+.card-open::after{content:"";position:absolute;inset:0;border-radius:var(--r)}
+.card-open:focus-visible::after{outline:2px solid var(--accent);outline-offset:6px}
+.card h3 .en{color:var(--muted);font-weight:400;font-size:.8em;margin-left:6px}
+.thumb{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:var(--r);overflow:hidden;background:var(--thumb);border:1px solid var(--line);transition:transform .35s ease}
+.card:hover .thumb{transform:translateY(-4px)}
+.thumb svg{position:absolute;inset:0;width:100%;height:100%}
+.mock{position:absolute;left:12px;bottom:12px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;padding:4px 8px;border-radius:6px;background:color-mix(in srgb,var(--bg) 82%,transparent);color:var(--muted)}
+.status{position:absolute;right:12px;top:12px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.status.wip i{background:var(--wip)}
+.status.award i{background:var(--glow)}
+.card-meta{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card h3{font-size:clamp(20px,2.2vw,24px);line-height:1.2}
+.card .year{font-family:var(--f-mono);font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-family:var(--f-mono);font-size:11.5px;padding:3px 8px;border-radius:6px;border:1px solid var(--line)}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);align-items:start}
+@media (max-width:820px){.about{grid-template-columns:1fr}}
+.portrait{aspect-ratio:4/5;max-width:100%;border-radius:var(--r);overflow:hidden;background:var(--thumb);border:1px solid var(--line);margin:0}
+.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:58% 38%}
+.about h3{font-size:clamp(24px,3vw,34px);line-height:1.3;font-weight:400;letter-spacing:-.015em;max-width:30ch}
+.about h3 b{font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px;background:var(--fg);color:var(--bg);border:0;cursor:pointer;font-family:var(--f-body)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+
+/* experience */
+.xp{margin-top:clamp(56px,7vw,88px)}
+.xp-lead{max-width:60ch;color:var(--muted);margin:0 0 28px}
+.xp-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.xp-list li{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) auto;gap:8px 24px;padding:22px 0;border-bottom:1px solid var(--line)}
+@media (max-width:720px){.xp-list li{grid-template-columns:1fr}}
+.xp-list .org{font-family:var(--f-display);font-weight:600;font-size:19px;line-height:1.3}
+.xp-list .role{font-weight:500}
+.xp-list .desc{color:var(--muted);font-size:14.5px;margin-top:2px}
+.xp-list .when{font-family:var(--f-mono);font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbd{font-family:var(--f-mono);font-size:11px;color:var(--wip);border:1px dashed currentColor;border-radius:5px;padding:1px 6px;margin-left:6px;white-space:nowrap}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.skills{grid-template-columns:1fr}}
+.skill{padding:22px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.skill h3{font-size:18px;margin-bottom:12px}
+.skill ul{list-style:none;margin:0;padding:0;display:grid;gap:4px;color:var(--muted);font-size:15px}
+
+/* contact */
+.contact{background:var(--fg);color:var(--bg);padding-block:clamp(72px,10vw,120px) 32px}
+.contact h2{font-size:clamp(38px,6vw,76px);line-height:1.02;max-width:16ch}
+.contact .label{color:color-mix(in srgb,var(--bg) 60%,var(--fg))}
+.contact-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;align-items:center}
+.contact .btn{background:var(--bg);color:var(--fg)}
+.contact .btn.ghost{background:transparent;color:var(--bg);border-color:color-mix(in srgb,var(--bg) 30%,var(--fg))}
+.email{font-family:var(--f-mono);font-size:15px;user-select:all}
+.giant{font-family:var(--f-display);font-weight:800;font-size:clamp(64px,18vw,240px);line-height:.85;letter-spacing:-.05em;margin-top:clamp(56px,9vw,110px);white-space:nowrap;overflow:hidden}
+.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:24px;font-family:var(--f-mono);font-size:12px;color:color-mix(in srgb,var(--bg) 55%,var(--fg))}
+
+/* dialog */
+dialog{width:min(720px,calc(100vw - 32px));max-height:calc(100dvh - 48px);border:1px solid var(--line);border-radius:18px;padding:0;background:var(--surface);color:var(--fg)}
+dialog::backdrop{background:rgba(10,12,14,.55);backdrop-filter:blur(3px)}
+.dlg{padding:clamp(20px,4vw,36px);display:grid;gap:18px}
+.dlg .thumb{border-radius:12px}
+.dlg h3{font-size:clamp(26px,4vw,36px);line-height:1.1}
+.dlg dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 20px;margin:0;font-size:15px}
+.dlg dt{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.dlg dd{margin:0}
+.dlg ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.thumb img,.thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.media{display:grid;gap:10px}
+.media video,.media img{width:100%;border-radius:12px;border:1px solid var(--line);display:block}
+.media .yt{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.media .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{font-size:14px;padding:8px 14px}
+.close{justify-self:end;font:500 14px var(--f-body);background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:560px){.nav nav a{padding:6px 7px;font-size:13px}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Sowon Oh</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding:0">
+    <canvas id="trail" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hello">Hello,</div>
+      <h1>I'm <em>Sowon</em>.</h1>
+      <p class="thesis">Computer Science student building interactive and immersive experiences that people feel, not just use.</p>
+      <div class="hero-meta">
+        <span class="chip"><span class="dot"></span>Undergraduate Researcher · Immersive Computing &amp; Interaction Lab</span>
+        <span class="chip">Kyung Hee University · CSE × Immersive Media</span>
+      </div>
+    </div>
+    <span class="hint">move your cursor ↗</span>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Projects</h2>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button type="button" data-f="all" aria-pressed="true">All</button>
+          <button type="button" data-f="frontend" aria-pressed="false">Frontend</button>
+          <button type="button" data-f="backend" aria-pressed="false">Backend</button>
+          <button type="button" data-f="xr" aria-pressed="false">XR / Interactive</button>
+          <button type="button" data-f="research" aria-pressed="false">Research</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="about" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head"><h2>About</h2></div>
+      <div class="about">
+        <figure class="portrait"><img src="portrait.jpg" width="800" height="1066" loading="lazy" decoding="async" alt="Portrait of Sowon Oh"></figure>
+        <div>
+          <h3>Hi, I'm <b>Sowon Oh</b>, a Computer Science student at Kyung Hee University double majoring in Immersive Media. I work across <b>frontend</b>, <b>backend</b> and <b>XR</b>, and I'm most interested in how people interact with technology in immersive spaces.</h3>
+          <div class="btn-row">
+            <a class="btn" href="https://wanimetro.github.io/" target="_blank" rel="noopener">Read my dev log ↗</a>
+            <a class="btn ghost" href="https://github.com/wanimetro" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="xp" id="experience" style="scroll-margin-top:80px">
+        <div class="label" style="margin-bottom:10px">Education &amp; Experience</div>
+        <p class="xp-lead">From product teams that ship to real users, to hackathons with international teammates, to research on interaction in XR.</p>
+        <ul class="xp-list">
+          <li>
+            <div class="org">Immersive Computing &amp; Interaction Lab</div>
+            <div><div class="role">Undergraduate Researcher · Kyung Hee University</div><div class="desc">Research on interaction techniques in XR environments.<span class="tbd">detail TBD</span></div></div>
+            <div class="when">2026 – Present</div>
+          </li>
+          <li>
+            <div class="org">XREAL 11th</div>
+            <div><div class="role">XR Club Member</div><div class="desc">Building XR projects in Unity with the XR club.<span class="tbd">detail TBD</span></div></div>
+            <div class="when">2026 – Present</div>
+          </li>
+          <li>
+            <div class="org">IT's TIME 10th</div>
+            <div><div class="role">Frontend Developer</div><div class="desc">Built and launched 사계단지 as an Apps in Toss mini app with real users.</div></div>
+            <div class="when">2026</div>
+          </li>
+          <li>
+            <div class="org">AWS Cloud Club</div>
+            <div><div class="role">Backend Developer</div><div class="desc">Studied Spring and built authentication &amp; authorization for PLANFLOW.</div></div>
+            <div class="when">2026</div>
+          </li>
+          <li>
+            <div class="org">EPITECH Paris</div>
+            <div><div class="role">Immersive Media Summer Program</div><div class="desc">Global AI Hackathon · Best Technical Project (LookItUp).</div></div>
+            <div class="when">Jun – Jul 2026</div>
+          </li>
+          <li>
+            <div class="org">Kyung Hee University</div>
+            <div><div class="role">B.E. Computer Science &amp; Engineering</div><div class="desc">Double major in Immersive Media.</div></div>
+            <div class="when">Mar 2025 – Feb 2029 (exp.)</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head"><h2>Key Skills</h2></div>
+      <div class="skills">
+        <div class="skill"><h3>Frontend</h3><ul><li>React</li><li>TypeScript</li><li>JavaScript</li><li>Vite · Tailwind</li><li>Electron</li></ul></div>
+        <div class="skill"><h3>Backend</h3><ul><li>Spring Boot</li><li>Spring Security</li><li>Spring Data JPA</li><li>PostgreSQL</li><li>Express · FastAPI</li></ul></div>
+        <div class="skill"><h3>XR &amp; Interactive</h3><ul><li>Unity · C#</li><li>Three.js</li><li>MediaPipe</li><li>D3</li></ul></div>
+        <div class="skill"><h3>AI &amp; Cloud</h3><ul><li>Amazon Bedrock</li><li>LangChain</li><li>OpenAI · Gemini API</li><li>AWS S3 · Transcribe</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact" class="contact">
+  <div class="wrap">
+    <div class="label" style="margin-bottom:14px">Contact</div>
+    <h2>Interested in XR, HCI, or building something together? Let's talk.</h2>
+    <div class="contact-row">
+      <button class="btn" type="button" id="copy">Copy email</button>
+      <span class="email" id="email">sowon0507@khu.ac.kr</span>
+      <a class="btn ghost" href="https://github.com/wanimetro" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn ghost" href="https://wanimetro.github.io/" target="_blank" rel="noopener">Blog ↗</a>
+    </div>
+    <div class="giant" aria-hidden="true">Sowon Oh</div>
+    <div class="foot"><span>© 2026 Sowon Oh</span><span>Seoul, KR</span></div>
+  </div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg" id="dlg-body"></div></dialog>
+
+<script>
+const art = {
+  garden:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="var(--thumb-ink)" stroke-width="1.5"><circle cx="90" cy="100" r="46"/><circle cx="160" cy="100" r="46"/><circle cx="230" cy="100" r="46"/><circle cx="160" cy="100" r="86"/></g><circle cx="90" cy="100" r="7" fill="var(--ok)"/><circle cx="160" cy="100" r="7" fill="var(--glow)"/><circle cx="230" cy="100" r="7" fill="var(--accent)"/><rect x="138" y="20" width="44" height="78" rx="9" fill="var(--surface)" stroke="var(--thumb-ink)"/><rect x="146" y="32" width="28" height="4" rx="2" fill="var(--thumb-ink)"/></svg>`,
+  planflow:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g fill="var(--surface)" stroke="var(--thumb-ink)"><rect x="40" y="44" width="62" height="80" rx="6"/><rect x="129" y="60" width="62" height="80" rx="6"/><rect x="218" y="76" width="62" height="80" rx="6"/></g><g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M102 84h27M191 100h27"/></g><g fill="var(--thumb-ink)"><rect x="50" y="56" width="40" height="4" rx="2"/><rect x="50" y="66" width="30" height="4" rx="2"/><rect x="139" y="72" width="40" height="4" rx="2"/><rect x="228" y="88" width="40" height="4" rx="2"/></g><rect x="236" y="120" width="26" height="22" rx="4" fill="var(--accent)"/><path d="M242 128v-4a7 7 0 0 1 14 0v4" stroke="var(--accent)" stroke-width="2" fill="none"/></svg>`,
+  lookitup:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><rect x="60" y="34" width="200" height="30" rx="15" fill="var(--surface)" stroke="var(--thumb-ink)"/><circle cx="80" cy="49" r="7" fill="none" stroke="var(--muted)" stroke-width="2"/><g fill="var(--surface)" stroke="var(--thumb-ink)"><rect x="60" y="80" width="96" height="86" rx="8"/><rect x="164" y="80" width="96" height="86" rx="8"/></g><g fill="var(--thumb-ink)"><rect x="72" y="96" width="60" height="4" rx="2"/><rect x="72" y="106" width="70" height="4" rx="2"/><rect x="176" y="96" width="60" height="4" rx="2"/><rect x="176" y="106" width="50" height="4" rx="2"/></g><path d="M74 142l8 8 16-16" stroke="var(--ok)" stroke-width="3" fill="none"/><path d="M178 142l8 8 16-16" stroke="var(--ok)" stroke-width="3" fill="none"/></svg>`,
+  xreal:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g stroke="var(--thumb-ink)" stroke-width="1" fill="none"><path d="M0 200L160 110L320 200M40 200L160 110L280 200M80 200L160 110L240 200M120 200L160 110L200 200"/><path d="M45 165h230M80 145h160M110 128h100"/></g><circle cx="160" cy="70" r="26" fill="none" stroke="var(--glow)" stroke-width="2"/><circle cx="160" cy="70" r="6" fill="var(--glow)"/></svg>`,
+  vr:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="var(--thumb-ink)" stroke-width="1.5"><path d="M130 70l40-20 40 20v50l-40 20-40-20z"/><path d="M130 70l40 20 40-20M170 90v50"/></g><rect x="70" y="120" width="90" height="44" rx="20" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="96" cy="142" r="9" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="134" cy="142" r="9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg>`,
+  lab:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g fill="var(--thumb-ink)">${Array.from({length:6},(_,r)=>Array.from({length:9},(_,c)=>`<circle cx="${60+c*25}" cy="${45+r*22}" r="2"/>`).join('')).join('')}</g><g stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"><path d="M150 160v-50M165 160v-62M180 160v-56M195 160v-44"/><path d="M140 160c-6-10-14-18-20-24"/></g><circle cx="165" cy="92" r="6" fill="var(--glow)"/></svg>`
+};
+
+/* ───────────────────────────────────────────────────────────
+   PROJECTS — 여기만 고치면 카드와 상세 모달이 같이 바뀝니다.
+   비워둔 필드(빈 문자열/빈 배열)는 화면에 나오지 않아요.
+
+   id        고유 키 (영문)
+   cat       필터: 'frontend' | 'backend' | 'xr' | 'research'
+   title/en  제목 / 영문 부제
+   year      기간 표기
+   status    [라벨, ''|'wip'|'award']
+   cover     썸네일 이미지 경로 (예: 'img/garden.jpg'). 없으면 SVG 일러스트
+   tags      카드에 보이는 태그
+   short     카드·모달 한두 줄 요약
+   type      어디서 만든 건지 (동아리·수업·해커톤…)
+   team      팀 구성 (예: 'FE 2 · BE 2 · Design 1')
+   role      내 역할
+   stack     기술 스택
+   problem   어떤 문제를 풀었나 (1~2문장)
+   points    내가 한 일 / 기술적 포인트 (3~4개)
+   outcome   결과 (수상, 사용자 수, 배운 점…)
+   video     YouTube 주소 또는 'media/demo.mp4'
+   images    추가 스크린샷 경로 배열
+   links     [{label:'GitHub', url:'...'}, ...]
+   ─────────────────────────────────────────────────────────── */
+const projects = [
+  {id:'garden', cat:['frontend'], title:'사계단지', en:'', year:'Jun 2026 –', art:'garden', cover:'img/sagye/cover.png',
+   status:['Shipped · Toss',''], tags:["IT's TIME 10th",'Apps in Toss','React'],
+   short:'A Toss mini app that recommends a seasonal activity every day and lets you keep photo records, collected into a "jar" for each season.',
+   type:"IT's TIME 10th · Team project · Apps in Toss", team:'2 Frontend · 3 Backend · 1 Planner · 1 Designer', role:'Frontend · Seasonal jar (단지) screens',
+   stack:'React · TypeScript · Vite · Tailwind CSS · Toss Design System (TDS) · React Router · Axios · Apps in Toss SDK',
+   problem:'Seasons pass quickly and the small seasonal moments of everyday life are easy to miss. 사계단지 suggests a seasonal activity each day and lets users record it with a photo and a short note, so a whole year of seasons builds up as a personal archive.',
+   points:['Owned the seasonal jar screens: grid and list views, record detail, edit, delete and jar decoration',
+           'Built sticker decoration with drag, resize, rotate and layering, capped at 20 stickers per page',
+           'Fixed sticker save bugs by validating ranges and normalizing layer order before sending to the server, with a test script covering the edge cases',
+           'Added screen analytics to the jar view and fixed Lottie usage to pass the Apps in Toss review'],
+   outcome:'Launched as an Apps in Toss mini app with real users. Working inside TDS and the Toss review rules taught me to build within a platform\'s constraints, and the sticker bugs taught me to validate data at the boundary instead of trusting UI state.',
+   video:'', images:[],
+   links:[{label:'GitHub', url:'https://github.com/ITTA-10th-Team2/sagye-danji-frontend'}]},
+  {id:'planflow', cat:['backend'], title:'PLANFLOW', year:'Jun – Jul 2026', art:'planflow', cover:'img/planflow/cover.png',
+   status:['Completed',''], tags:['AWS Cloud Club','Spring Boot','Auth'],
+   short:'An AI workspace that turns meeting notes into planning docs, feature specs, screen specs and wireframes, reviewed and approved stage by stage. I built the authentication and authorization layer.',
+   type:'AWS Cloud Club · Spring study team project', team:'', role:'Authentication · Session Security · Authorization',
+   stack:'Spring Boot 3.5 · Spring Security · Spring Data JPA · PostgreSQL · Spring WebSocket · AWS S3 / Transcribe · Gemini API · Swagger',
+   problem:'At hackathons and side projects, meetings rarely turn into written specs, so teammates build different versions of the same feature and AI coding tools have nothing structured to work from. PLANFLOW turns meeting text or speech into development-ready documents through a staged AI pipeline, with team review and leader approval at each step.',
+   points:['Session-based authentication on Spring Security: sign up, log in, log out and current-user APIs',
+           'HttpOnly cookie + session token flow, with tokens stored as SHA-256 hashes and passwords hashed with BCrypt',
+           'SessionAuthFilter to authenticate every request',
+           'Shared Leader / Member permission checks for project access and stage approval',
+           '<code>@LoginUser</code> argument resolver so every API reads the logged-in user the same way'],
+   outcome:'Working with senior teammates, I saw how writing specs, ERD and API docs before coding kept the team aligned and cut rework. On the technical side, I learned to design a secure auth flow and to separate authentication from authorization in a structure the whole team could reuse.',
+   video:'', images:['img/planflow/1-login.png','img/planflow/2-dashboard.png','img/planflow/3-ai-planning.png','img/planflow/4-screen-spec.png','img/planflow/5-wireframe.png'],
+   links:[]},
+  {id:'lookitup', cat:['frontend'], title:'LookItUp', year:'Jul 2026', art:'lookitup', cover:'img/lookitup/cover.png',
+   status:['Best Technical Project','award'], tags:['Global AI Hackathon','EPITECH Paris','React'],
+   short:'A trusted-source search platform that helps journalists verify information before publishing. Built in 48 hours with an international team.',
+   type:'Global AI Hackathon @ EPITECH Paris', team:'International team', role:'Problem Definition · Service Planning · User Flow Design · Storytelling',
+   stack:'React · TypeScript · Vite · FastAPI · Python · RSS parsing · BeautifulSoup · PyMuPDF',
+   problem:'The hackathon theme was "solve problems journalists face in the AI era." With generative AI and fake news spreading fast, journalists must verify facts quickly, but open-web search mixes reliable and unreliable results. Instead of an AI that hands out answers, LookItUp searches only the sources a journalist already trusts and returns evidence cards, leaving the final call to the journalist.',
+   points:['Merged ideas from teammates of different nationalities into one core problem and service direction',
+           'Defined the target user, core features and MVP scope, and designed the user flow',
+           'Built the demo storyline around a key user scenario so the pitch conveyed value, not just features',
+           'Aligned decisions across language and cultural differences within the 48-hour window'],
+   outcome:'🏆 Best Technical Project among international teams. I learned that a sharply defined problem and a focused MVP matter more than implementing every idea, and that AI works best as a tool that supports human judgment.',
+   video:'media/lookitup-demo.mp4', images:['img/lookitup/demo.png'],
+   links:[{label:'Presentation (PDF)', url:'media/lookitup-presentation.pdf'}]},
+  {id:'lab', cat:['research','xr'], title:'ICILab Research', year:'2026 –', art:'lab', cover:'',
+   status:['Ongoing','wip'], tags:['Undergraduate Researcher','XR','HCI'],
+   short:'Undergraduate research at the Immersive Computing & Interaction Lab on interaction techniques in XR.',
+   type:'Immersive Computing & Interaction Lab, Kyung Hee University', team:'', role:'Undergraduate Researcher',
+   stack:'<span class="tbd">TBD</span>',
+   problem:'', points:['Research topic <span class="tbd">TBD</span>'], outcome:'',
+   video:'', images:[], links:[]}
+];
+
+/* 준비 중 — 자료가 생기면 위 projects 배열로 옮기세요 */
+const drafts = [
+  {id:'xreal', cat:['xr'], title:'XREAL Project', year:'2026', art:'xreal', cover:'',
+   status:['In progress','wip'], tags:['XREAL','XR','Unity'],
+   short:'An XR piece made at XREAL, now being developed into a full portfolio work.',
+   type:'XREAL', team:'', role:'<span class="tbd">TBD</span>', stack:'<span class="tbd">TBD</span>',
+   problem:'', points:['Concept and visuals <span class="tbd">TBD</span>'], outcome:'',
+   video:'', images:[], links:[]},
+  {id:'vr', cat:['xr'], title:'VR Game', year:'Fall 2026', art:'vr', cover:'',
+   status:['In progress','wip'], tags:['Virtual Reality course','Unity','VR'],
+   short:'A VR game built for the Virtual Reality course, polished as a portfolio piece.',
+   type:'Virtual Reality course · Kyung Hee University', team:'', role:'<span class="tbd">TBD</span>', stack:'Unity <span class="tbd">TBD</span>',
+   problem:'', points:['Core interaction <span class="tbd">TBD</span>'], outcome:'',
+   video:'', images:[], links:[]}
+];
+
+const grid = document.getElementById('grid');
+function thumb(p){
+  const cls = p.status[1];
+  const visual = `${art[p.art]}<span class="mock">MOCK IMAGE</span>` + (p.cover ? `<img src="${p.cover}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : '');
+  return `<div class="thumb">${visual}<span class="status ${cls}"><i></i>${p.status[0]}</span></div>`;
+}
+const en = p => p.en ? `<span class="en">${p.en}</span>` : '';
+grid.innerHTML = projects.map(p=>`
+  <article class="card" data-cat="${p.cat.join(' ')}">
+    ${thumb(p)}
+    <div class="card-meta"><h3><button class="card-open" type="button" data-id="${p.id}">${p.title}</button>${en(p)}</h3><span class="year">${p.year}</span></div>
+    <p>${p.short}</p>
+    <div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+  </article>`).join('');
+
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+  const f=b.dataset.f;
+  grid.querySelectorAll('.card').forEach(c=>{ c.hidden = !(f==='all' || c.dataset.cat.split(' ').includes(f)); });
+}));
+
+function videoHTML(v){
+  if(!v) return '';
+  const yt = v.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
+  if(yt) return `<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}" title="Demo video" allowfullscreen loading="lazy"></iframe></div>`;
+  return `<video src="${v}" controls playsinline preload="metadata" onerror="this.remove()"></video>`;
+}
+const row = (k,v) => v ? `<dt>${k}</dt><dd>${v}</dd>` : '';
+const dlg=document.getElementById('dlg'), body=document.getElementById('dlg-body');
+grid.addEventListener('click',e=>{
+  const b=e.target.closest('.card-open'); if(!b) return;
+  const p=projects.find(x=>x.id===b.dataset.id);
+  const media = videoHTML(p.video) + (p.images||[]).map(src=>`<img src="${src}" alt="" loading="lazy" onerror="this.remove()">`).join('');
+  body.innerHTML=`<button class="close" type="button" id="dlg-close">Close</button>
+    ${thumb(p)}${media ? `<div class="media">${media}</div>` : ''}
+    <div><div class="label">${p.year}</div><h3 id="dlg-title">${p.title}${p.en?` <span style="color:var(--muted);font-weight:400">${p.en}</span>`:''}</h3></div>
+    <p style="margin:0">${p.short}</p>
+    <dl>${row('Type',p.type)}${row('Team',p.team)}${row('Role',p.role)}${row('Stack',p.stack)}</dl>
+    ${p.problem ? `<div><div class="label" style="margin-bottom:8px">Problem</div><p style="margin:0">${p.problem}</p></div>` : ''}
+    ${p.points?.length ? `<div><div class="label" style="margin-bottom:8px">What I did</div><ul>${p.points.map(x=>`<li>${x}</li>`).join('')}</ul></div>` : ''}
+    ${p.outcome ? `<div><div class="label" style="margin-bottom:8px">Outcome</div><p style="margin:0">${p.outcome}</p></div>` : ''}
+    ${p.links?.length ? `<div class="links">${p.links.map(l=>`<a class="btn ghost" href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('')}</div>` : ''}`;
+  document.getElementById('dlg-close').onclick=()=>dlg.close();
+  dlg.showModal();
+});
+dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+dlg.addEventListener('close',()=>{ body.querySelectorAll('video').forEach(v=>v.pause()); body.innerHTML=''; });
+
+document.getElementById('copy').addEventListener('click',async e=>{
+  const t=document.getElementById('email').textContent;
+  try{ await navigator.clipboard.writeText(t); e.target.textContent='Copied'; }
+  catch{ const r=document.createRange(); r.selectNodeContents(document.getElementById('email')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); e.target.textContent='Selected, press ⌘C'; }
+  setTimeout(()=>e.target.textContent='Copy email',1800);
+});
+
+/* Light trail hero */
+(()=>{
+  const cv=document.getElementById('trail'), ctx=cv.getContext('2d'), hero=cv.parentElement;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,dpr, pts=[], sparks=[], t=0, last=null, idle=0;
+  let G='',A='';
+  const readColors=()=>{ const cs=getComputedStyle(document.documentElement); G=cs.getPropertyValue('--glow').trim(); A=cs.getPropertyValue('--accent').trim(); };
+  readColors();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',readColors);
+  new MutationObserver(readColors).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  function size(){ dpr=Math.min(devicePixelRatio||1,2); W=hero.clientWidth; H=hero.clientHeight; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  size(); addEventListener('resize',size);
+  function add(x,y){ pts.push({x,y,life:1}); if(Math.random()<.5) sparks.push({x,y,vx:(Math.random()-.5)*1.2,vy:(Math.random()-.5)*1.2,life:1}); if(pts.length>70) pts.shift(); idle=0; }
+  hero.addEventListener('pointermove',e=>{ const r=hero.getBoundingClientRect(); add(e.clientX-r.left,e.clientY-r.top); });
+  function frame(){
+    t+=.012; idle++;
+    if(idle>90){ const x=W*(.62+.28*Math.cos(t*1.3)), y=H*(.5+.3*Math.sin(t*2.1)); pts.push({x,y,life:1}); if(pts.length>70) pts.shift(); }
+    ctx.clearRect(0,0,W,H);
+    const g=G, a=A;
+    ctx.lineCap='round'; ctx.lineJoin='round';
+    for(let i=1;i<pts.length;i++){
+      const p=pts[i], q=pts[i-1]; p.life-=.012;
+      ctx.strokeStyle= i%2? g : a; ctx.globalAlpha=Math.max(0,p.life)*.55;
+      ctx.lineWidth=2+p.life*6; ctx.shadowBlur=18; ctx.shadowColor=g;
+      ctx.beginPath(); ctx.moveTo(q.x,q.y); ctx.lineTo(p.x,p.y); ctx.stroke();
+    }
+    ctx.shadowBlur=0;
+    sparks.forEach(s=>{ s.x+=s.vx; s.y+=s.vy; s.life-=.02; ctx.globalAlpha=Math.max(0,s.life); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(s.x,s.y,1.6,0,7); ctx.fill(); });
+    sparks=sparks.filter(s=>s.life>0); pts=pts.filter(p=>p.life>0);
+    ctx.globalAlpha=1;
+    if(running) requestAnimationFrame(frame);
+  }
+  let running=false;
+  new IntersectionObserver(([en])=>{ const v=en.isIntersecting; if(v&&!running&&!reduce){ running=true; requestAnimationFrame(frame); } else if(!v) running=false; }).observe(hero);
+})();
+</script>
+</body>
+</html>
