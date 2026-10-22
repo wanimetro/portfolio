@@ -69,17 +69,14 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .face.front img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:1px;filter:saturate(.92) contrast(1.02)}
 .face.front .cap{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:#6b6b6b;padding:12px 2px 14px}
 .face.front .cap i{font-style:normal;color:#a3a3a3}
-.face.back{position:absolute;inset:0;transform:rotateY(180deg);padding:20px 16px 14px;display:flex;flex-direction:column;gap:10px;font-size:12px;line-height:1.45;cursor:pointer;background-image:repeating-linear-gradient(transparent 0 21px,rgba(60,80,200,.07) 21px 22px)}
-.face.back .bn{font-family:var(--f-display);font-weight:700;font-size:17px;line-height:1.15}
-.face.back .bn small{display:block;font-family:var(--f-mono);font-weight:400;font-size:10.5px;color:#7a7a7a;margin-top:2px}
-.face.back dl{margin:0;display:grid;gap:6px}
-.face.back dt{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#8a8a8a}
-.face.back dd{margin:0}
-.face.back .bl{margin-top:auto;display:flex;gap:10px;align-items:center;font-family:var(--f-mono);font-size:10.5px}
+.face.back{position:absolute;inset:0;transform:rotateY(180deg);padding:20px 16px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;font-size:12px;line-height:1.45;cursor:pointer;background-image:repeating-linear-gradient(transparent 0 21px,rgba(60,80,200,.07) 21px 22px)}
+.face.back .bn{font-family:var(--f-display);font-weight:700;font-size:22px;line-height:1.15}
+.face.back .bn small{display:block;font-family:var(--f-mono);font-weight:400;font-size:12px;color:#7a7a7a;margin-top:6px}
+.face.back .bl{display:flex;flex-direction:column;gap:8px;align-items:center;font-family:var(--f-mono);font-size:12px}
 .face.back .bl a{color:#1b1b1b;text-underline-offset:3px}
-.face.back .flip-back{all:unset;margin-left:auto;cursor:pointer;color:#8a8a8a;font-size:13px}
+.face.back .flip-back{all:unset;position:absolute;right:12px;bottom:10px;cursor:pointer;color:#8a8a8a;font-size:13px}
 @media (prefers-reduced-motion:reduce){.hero-photo,.hero-photo:hover{transition:none;transform:rotate(3deg)}.flip-inner{transition:none}}
-@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-photo{order:-1;width:176px;justify-self:start;margin:8px 0 6px 6px}.face.front{padding:8px 8px 0}.face.front .cap{font-size:9.5px;padding:9px 1px 10px}.hero-photo .tape{width:56px;height:18px;top:-9px}.face.back{padding:14px 11px 10px;gap:7px;font-size:10.5px}.face.back .bn{font-size:14px}.face.back dt{font-size:8.5px}.face.back .bl{font-size:9.5px}}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-photo{order:-1;width:176px;justify-self:start;margin:8px 0 6px 6px}.face.front{padding:8px 8px 0}.face.front .cap{font-size:9.5px;padding:9px 1px 10px}.hero-photo .tape{width:56px;height:18px;top:-9px}.face.back{gap:14px}.face.back .bn{font-size:17px}.face.back .bn small{font-size:10px}.face.back .bl{font-size:10.5px}}
 .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;pointer-events:auto}
 .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
@@ -220,12 +217,8 @@ dialog::backdrop{background:rgba(10,12,14,.55);backdrop-filter:blur(3px)}
           </button>
           <div class="face back" aria-hidden="true">
             <div class="bn">Sowon Oh<small>오소원</small></div>
-            <dl>
-              <div><dt>Study</dt><dd>Kyung Hee University<br>CSE × Immersive Media</dd></div>
-              <div><dt>Now</dt><dd>Undergraduate Researcher, ICILab<br>XREAL 11th</dd></div>
-              <div><dt>Into</dt><dd>HCI · XR · Interactive media</dd></div>
-            </dl>
-            <div class="bl"><a href="https://github.com/wanimetro" target="_blank" rel="noopener" tabindex="-1">GitHub</a><a href="https://wanimetro.github.io/" target="_blank" rel="noopener" tabindex="-1">Blog</a><button type="button" class="flip-back" aria-label="Flip back" tabindex="-1">↻</button></div>
+            <div class="bl"><a href="https://github.com/wanimetro" target="_blank" rel="noopener" tabindex="-1">GitHub ↗</a><a href="https://wanimetro.github.io/" target="_blank" rel="noopener" tabindex="-1">Blog ↗</a></div>
+            <button type="button" class="flip-back" aria-label="Flip back" tabindex="-1">↻</button>
           </div>
         </div>
       </div>
