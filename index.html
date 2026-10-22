@@ -57,9 +57,9 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .hero h1{font-size:clamp(56px,10.5vw,140px);line-height:.92;font-weight:800;letter-spacing:-.045em;margin-top:6px}
 .hero h1 em{font-style:normal;color:var(--accent)}
 .hero p.thesis{max-width:34ch;font-size:clamp(17px,2vw,21px);margin:28px 0 0;line-height:1.5}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) clamp(220px,24vw,300px);gap:clamp(24px,4vw,56px);align-items:center}
-.hero-photo{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:20px;border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(0,0,0,.35);pointer-events:auto}
-@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-photo{order:-1;width:min(200px,55vw)}}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) clamp(150px,15vw,200px);gap:clamp(24px,4vw,56px);align-items:center}
+.hero-photo{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;border:1px solid var(--line);box-shadow:0 16px 40px -20px rgba(0,0,0,.3);pointer-events:auto}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-photo{order:-1;width:112px;border-radius:14px}}
 .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;pointer-events:auto}
 .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
