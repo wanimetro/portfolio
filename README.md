@@ -19,8 +19,8 @@ img/planflow/2-dashboard.png
 img/planflow/3-ai-planning.png
 img/planflow/4-screen-spec.png
 img/planflow/5-wireframe.png
-img/lookitup/cover.png
-img/lookitup/demo.png
+img/lookitup/cover.jpg
+img/lookitup/results.jpg
 media/lookitup-demo.mp4           (YouTube 링크로 대체 가능)
 media/lookitup-presentation.pdf
 ```

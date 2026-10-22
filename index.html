@@ -348,19 +348,19 @@ const projects = [
    outcome:'Working with senior teammates, I saw how writing specs, ERD and API docs before coding kept the team aligned and cut rework. On the technical side, I learned to design a secure auth flow and to separate authentication from authorization in a structure the whole team could reuse.',
    video:'', images:['img/planflow/1-login.png','img/planflow/2-dashboard.png','img/planflow/3-ai-planning.png','img/planflow/4-screen-spec.png','img/planflow/5-wireframe.png'],
    links:[]},
-  {id:'lookitup', cat:['frontend'], title:'LookItUp', year:'Jul 2026', art:'lookitup', cover:'img/lookitup/cover.png',
-   status:['Best Technical Project','award'], tags:['Global AI Hackathon','EPITECH Paris','React'],
-   short:'A trusted-source search platform that helps journalists verify information before publishing. Built in 48 hours with an international team.',
-   type:'Global AI Hackathon @ EPITECH Paris', team:'International team', role:'Problem Definition · Service Planning · User Flow Design · Storytelling',
-   stack:'React · TypeScript · Vite · FastAPI · Python · RSS parsing · BeautifulSoup · PyMuPDF',
-   problem:'The hackathon theme was "solve problems journalists face in the AI era." With generative AI and fake news spreading fast, journalists must verify facts quickly, but open-web search mixes reliable and unreliable results. Instead of an AI that hands out answers, LookItUp searches only the sources a journalist already trusts and returns evidence cards, leaving the final call to the journalist.',
-   points:['Merged ideas from teammates of different nationalities into one core problem and service direction',
-           'Defined the target user, core features and MVP scope, and designed the user flow',
-           'Built the demo storyline around a key user scenario so the pitch conveyed value, not just features',
-           'Aligned decisions across language and cultural differences within the 48-hour window'],
+  {id:'lookitup', cat:['frontend'], title:'LookItUp', year:'Jul 2026', art:'lookitup', cover:'img/lookitup/cover.jpg',
+   status:['Best Technical Project','award'], tags:['Global AI Hackathon','EPITECH Paris','React · FastAPI'],
+   short:'A search engine for journalists that searches only the sources they already trust, not the open web. Built in 48 hours with a Korean–French team.',
+   type:'Global AI Hackathon @ EPITECH Paris', team:'Team 6 · Korea & France', role:'Problem Definition · Service Planning · User Flow Design · Storytelling',
+   stack:'React · TypeScript · Vite · FastAPI · Python · feedparser · BeautifulSoup · PyMuPDF · Android (Kotlin)',
+   problem:'The theme was "solve problems journalists face in the AI era." In the State of the Media 2026 report, half of journalists named checking for fake news as their main challenge, and over half refused AI because it cannot reliably tell true from false. Open-web search mixes reliable and unreliable results, so verification is slow. LookItUp flips this: journalists add the sources they trust once, then search only inside them. Search comes first, AI only when useful, and the journalist makes the final call.',
+   points:['Merged ideas from Korean and French teammates into one core problem and the line "Google searches the open web. LookItUp searches your trusted world."',
+           'Scoped the MVP to one flow: add trusted sources (RSS, website, text, PDF) → keyword search inside them → Trusted Result Cards with excerpts, match counts and relevance scores',
+           'Kept AI optional by design: a summary is generated only from the trusted results on screen, never from the open web',
+           'Built the pitch around a live breaking-news scenario so the demo showed value, not a feature list'],
    outcome:'🏆 Best Technical Project among international teams. I learned that a sharply defined problem and a focused MVP matter more than implementing every idea, and that AI works best as a tool that supports human judgment.',
-   video:'media/lookitup-demo.mp4', images:['img/lookitup/demo.png'],
-   links:[{label:'Presentation (PDF)', url:'media/lookitup-presentation.pdf'}]},
+   video:'media/lookitup-demo.mp4', images:['img/lookitup/results.jpg'],
+   links:[{label:'GitHub', url:'https://github.com/wanimetro/Lookitup'},{label:'Pitch deck (PDF)', url:'media/lookitup-presentation.pdf'}]},
   {id:'lab', cat:['research','xr'], title:'ICILab Research', year:'2026 –', art:'lab', cover:'',
    status:['Ongoing','wip'], tags:['Undergraduate Researcher','XR','HCI'],
    short:'Undergraduate research at the Immersive Computing & Interaction Lab on interaction techniques in XR.',
@@ -407,20 +407,20 @@ document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('clic
   grid.querySelectorAll('.card').forEach(c=>{ c.hidden = !(f==='all' || c.dataset.cat.split(' ').includes(f)); });
 }));
 
-function videoHTML(v){
+function videoHTML(v, poster){
   if(!v) return '';
   const yt = v.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
   if(yt) return `<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}" title="Demo video" allowfullscreen loading="lazy"></iframe></div>`;
-  return `<video src="${v}" controls playsinline preload="metadata" onerror="this.remove()"></video>`;
+  return `<video src="${v}" ${poster?`poster="${poster}"`:''} controls playsinline muted preload="metadata" onerror="this.poster ? this.replaceWith(Object.assign(document.createElement('img'),{src:this.poster,alt:''})) : this.remove()"></video>`;
 }
 const row = (k,v) => v ? `<dt>${k}</dt><dd>${v}</dd>` : '';
 const dlg=document.getElementById('dlg'), body=document.getElementById('dlg-body');
 grid.addEventListener('click',e=>{
   const b=e.target.closest('.card-open'); if(!b) return;
   const p=projects.find(x=>x.id===b.dataset.id);
-  const media = videoHTML(p.video) + (p.images||[]).map(src=>`<img src="${src}" alt="" loading="lazy" onerror="this.remove()">`).join('');
+  const media = videoHTML(p.video, p.cover) + (p.images||[]).map(src=>`<img src="${src}" alt="" loading="lazy" onerror="this.remove()">`).join('');
   body.innerHTML=`<button class="close" type="button" id="dlg-close">Close</button>
-    ${thumb(p)}${media ? `<div class="media">${media}</div>` : ''}
+    ${p.video ? '' : thumb(p)}${media ? `<div class="media">${media}</div>` : ''}
     <div><div class="label">${p.year}</div><h3 id="dlg-title">${p.title}${p.en?` <span style="color:var(--muted);font-weight:400">${p.en}</span>`:''}</h3></div>
     <p style="margin:0">${p.short}</p>
     <dl>${row('Type',p.type)}${row('Team',p.team)}${row('Role',p.role)}${row('Stack',p.stack)}</dl>
