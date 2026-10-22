@@ -12,7 +12,7 @@ Live: https://wanimetro.github.io/portfolio/
 없는 파일은 화면에 안 나오고 일러스트로 대체됩니다.
 
 ```
-img/sagye/cover.png
+img/sagye/cover.jpg  (+ screens.jpg)
 img/planflow/cover.png
 img/planflow/1-login.png
 img/planflow/2-dashboard.png
