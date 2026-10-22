@@ -159,6 +159,7 @@ dialog::backdrop{background:rgba(10,12,14,.55);backdrop-filter:blur(3px)}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media (max-width:560px){.nav nav a{padding:6px 7px;font-size:13px}}
+.empty{grid-column:1/-1;margin:0;padding:64px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
 </style>
 </head>
 <body>
@@ -361,26 +362,7 @@ const projects = [
            'On demo day, opened the backend CORS settings so the live demo could reach the API from the presentation setup'],
    outcome:'🏆 Won Best Technical Project.<br>With only 48 hours, we focused on defining the problem quickly and committing to one clear solution. Working across languages and cultures, I learned that what matters most is framing the problem clearly and aligning everyone around the value users will actually feel. I also saw that building the MVP around a few core features, prioritized by the user flow, makes a service feel more complete than trying to build every idea.',
    video:'media/lookitup-demo.mp4', images:['img/lookitup/results.jpg'],
-   links:[{label:'GitHub', url:'https://github.com/wanimetro/Lookitup'},{label:'Pitch deck (PDF)', url:'media/lookitup-presentation.pdf'}]},
-  {id:'xreal', cat:['xr'], title:'XREAL Project', year:'2026', art:'xreal', cover:'',
-   status:['In progress','wip'], tags:['XREAL','XR','Unity'],
-   short:'An XR piece made at XREAL, now being developed into a full portfolio work.',
-   type:'XREAL', team:'', role:'<span class="tbd">TBD</span>', stack:'<span class="tbd">TBD</span>',
-   problem:'', points:['Concept and visuals <span class="tbd">TBD</span>'], outcome:'',
-   video:'', images:[], links:[]},
-  {id:'vr', cat:['xr'], title:'VR Game', year:'Fall 2026', art:'vr', cover:'',
-   status:['In progress','wip'], tags:['Virtual Reality course','Unity','VR'],
-   short:'A VR game built for the Virtual Reality course, polished as a portfolio piece.',
-   type:'Virtual Reality course · Kyung Hee University', team:'', role:'<span class="tbd">TBD</span>', stack:'Unity <span class="tbd">TBD</span>',
-   problem:'', points:['Core interaction <span class="tbd">TBD</span>'], outcome:'',
-   video:'', images:[], links:[]},
-  {id:'lab', cat:['xr'], title:'ICILab Research', year:'2026 –', art:'lab', cover:'',
-   status:['Ongoing','wip'], tags:['Undergraduate Researcher','XR','HCI'],
-   short:'Undergraduate research at the Immersive Computing & Interaction Lab on interaction techniques in XR.',
-   type:'Immersive Computing & Interaction Lab, Kyung Hee University', team:'', role:'Undergraduate Researcher',
-   stack:'<span class="tbd">TBD</span>',
-   problem:'', points:['Research topic <span class="tbd">TBD</span>'], outcome:'',
-   video:'', images:[], links:[]}
+   links:[{label:'GitHub', url:'https://github.com/wanimetro/Lookitup'},{label:'Pitch deck (PDF)', url:'media/lookitup-presentation.pdf'}]}
 ];
 
 const grid = document.getElementById('grid');
@@ -390,7 +372,7 @@ function thumb(p){
   return `<div class="thumb">${visual}<span class="status ${cls}"><i></i>${p.status[0]}</span></div>`;
 }
 const en = p => p.en ? `<span class="en">${p.en}</span>` : '';
-grid.innerHTML = projects.map(p=>`
+grid.innerHTML = `<p class="empty" id="empty" hidden>XR and interactive projects are in progress. Coming soon.</p>` + projects.map(p=>`
   <article class="card" data-cat="${p.cat.join(' ')}">
     ${thumb(p)}
     <div class="card-meta"><h3><button class="card-open" type="button" data-id="${p.id}">${p.title}</button>${en(p)}</h3><span class="year">${p.year}</span></div>
@@ -402,6 +384,7 @@ document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('clic
   document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed', x===b));
   const f=b.dataset.f;
   grid.querySelectorAll('.card').forEach(c=>{ c.hidden = !(f==='all' || c.dataset.cat.split(' ').includes(f)); });
+  document.getElementById('empty').hidden = !!grid.querySelector('.card:not([hidden])');
 }));
 
 function videoHTML(v, poster){
