@@ -58,13 +58,28 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .hero h1 em{font-style:normal;color:var(--accent)}
 .hero p.thesis{max-width:34ch;font-size:clamp(17px,2vw,21px);margin:28px 0 0;line-height:1.5}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) clamp(150px,15vw,200px);gap:clamp(24px,4vw,56px);align-items:center}
-.hero-photo{position:relative;margin:0;padding:10px 10px 0;background:#fdfcf8;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 40px -18px rgba(0,0,0,.35);transform:rotate(4deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s;pointer-events:auto;justify-self:center}
-.hero-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:1px;filter:saturate(.92) contrast(1.02)}
-.hero-photo figcaption{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:#6b6b6b;text-align:center;padding:12px 0 14px}
-.hero-photo .tape{position:absolute;top:-12px;left:50%;width:76px;height:24px;transform:translateX(-50%) rotate(-5deg);background:color-mix(in srgb,var(--accent) 22%,#fff8);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);opacity:.85}
-.hero-photo:hover{transform:rotate(0deg) translateY(-6px) scale(1.03);box-shadow:0 1px 2px rgba(0,0,0,.08),0 28px 50px -20px rgba(0,0,0,.4)}
-@media (prefers-reduced-motion:reduce){.hero-photo,.hero-photo:hover{transition:none;transform:rotate(3deg)}}
-@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-photo{order:-1;width:132px;justify-self:start;margin:8px 0 6px 6px;padding:7px 7px 0}.hero-photo figcaption{font-size:9px;padding:8px 0 9px}.hero-photo .tape{width:52px;height:18px;top:-9px}}
+.hero-photo{position:relative;justify-self:center;width:100%;perspective:1200px;transform:rotate(4deg);transition:transform .45s cubic-bezier(.2,.8,.2,1);pointer-events:auto}
+.hero-photo:hover{transform:rotate(0deg) translateY(-6px) scale(1.03)}
+.hero-photo .tape{position:absolute;z-index:3;top:-12px;left:50%;width:76px;height:24px;transform:translateX(-50%) rotate(-5deg);background:color-mix(in srgb,var(--accent) 22%,#fff8);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);opacity:.85;pointer-events:none}
+.flip-inner{position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,.7,.2,1)}
+.hero-photo.flipped .flip-inner{transform:rotateY(180deg)}
+.face{background:#fdfcf8;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 40px -18px rgba(0,0,0,.35);backface-visibility:hidden;-webkit-backface-visibility:hidden;color:#1b1b1b}
+.face.front{all:unset;box-sizing:border-box;display:block;width:100%;padding:10px 10px 0;cursor:pointer;background:#fdfcf8;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 40px -18px rgba(0,0,0,.35);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.face.front:focus-visible,.face.back .flip-back:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.face.front img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:1px;filter:saturate(.92) contrast(1.02)}
+.face.front .cap{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:#6b6b6b;padding:12px 2px 14px}
+.face.front .cap i{font-style:normal;color:#a3a3a3}
+.face.back{position:absolute;inset:0;transform:rotateY(180deg);padding:20px 16px 14px;display:flex;flex-direction:column;gap:10px;font-size:12px;line-height:1.45;cursor:pointer;background-image:repeating-linear-gradient(transparent 0 21px,rgba(60,80,200,.07) 21px 22px)}
+.face.back .bn{font-family:var(--f-display);font-weight:700;font-size:17px;line-height:1.15}
+.face.back .bn small{display:block;font-family:var(--f-mono);font-weight:400;font-size:10.5px;color:#7a7a7a;margin-top:2px}
+.face.back dl{margin:0;display:grid;gap:6px}
+.face.back dt{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#8a8a8a}
+.face.back dd{margin:0}
+.face.back .bl{margin-top:auto;display:flex;gap:10px;align-items:center;font-family:var(--f-mono);font-size:10.5px}
+.face.back .bl a{color:#1b1b1b;text-underline-offset:3px}
+.face.back .flip-back{all:unset;margin-left:auto;cursor:pointer;color:#8a8a8a;font-size:13px}
+@media (prefers-reduced-motion:reduce){.hero-photo,.hero-photo:hover{transition:none;transform:rotate(3deg)}.flip-inner{transition:none}}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-photo{order:-1;width:176px;justify-self:start;margin:8px 0 6px 6px}.face.front{padding:8px 8px 0}.face.front .cap{font-size:9.5px;padding:9px 1px 10px}.hero-photo .tape{width:56px;height:18px;top:-9px}.face.back{padding:14px 11px 10px;gap:7px;font-size:10.5px}.face.back .bn{font-size:14px}.face.back dt{font-size:8.5px}.face.back .bl{font-size:9.5px}}
 .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;pointer-events:auto}
 .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
@@ -196,7 +211,24 @@ dialog::backdrop{background:rgba(10,12,14,.55);backdrop-filter:blur(3px)}
         <span class="chip">Kyung Hee University · CSE × Immersive Media</span>
       </div>
       </div>
-      <figure class="hero-photo"><span class="tape" aria-hidden="true"></span><img src="img/profile.jpg" width="720" height="900" alt="Portrait of Sowon Oh" fetchpriority="high"><figcaption>sowon · seoul, 2026</figcaption></figure>
+      <div class="hero-photo" id="polaroid">
+        <span class="tape" aria-hidden="true"></span>
+        <div class="flip-inner">
+          <button type="button" class="face front" aria-label="Flip card to see more about Sowon" aria-expanded="false">
+            <img src="img/profile.jpg" width="720" height="900" alt="Portrait of Sowon Oh" fetchpriority="high">
+            <span class="cap"><span>sowon · seoul, 2026</span><i aria-hidden="true">↻</i></span>
+          </button>
+          <div class="face back" aria-hidden="true">
+            <div class="bn">Sowon Oh<small>오소원</small></div>
+            <dl>
+              <div><dt>Study</dt><dd>Kyung Hee University<br>CSE × Immersive Media</dd></div>
+              <div><dt>Now</dt><dd>Undergraduate Researcher, ICILab<br>XREAL 11th</dd></div>
+              <div><dt>Into</dt><dd>HCI · XR · Interactive media</dd></div>
+            </dl>
+            <div class="bl"><a href="https://github.com/wanimetro" target="_blank" rel="noopener" tabindex="-1">GitHub</a><a href="https://wanimetro.github.io/" target="_blank" rel="noopener" tabindex="-1">Blog</a><button type="button" class="flip-back" aria-label="Flip back" tabindex="-1">↻</button></div>
+          </div>
+        </div>
+      </div>
     </div>
     <span class="hint">move your cursor ↗</span>
   </section>
@@ -468,6 +500,14 @@ document.getElementById('copy').addEventListener('click',async e=>{
   }
   let running=false;
   new IntersectionObserver(([en])=>{ const v=en.isIntersecting; if(v&&!running&&!reduce){ running=true; requestAnimationFrame(frame); } else if(!v) running=false; }).observe(hero);
+})();
+
+(()=>{const p=document.getElementById('polaroid'); if(!p) return;
+  const front=p.querySelector('.face.front'), back=p.querySelector('.face.back');
+  const set=f=>{p.classList.toggle('flipped',f); front.setAttribute('aria-expanded',f); back.setAttribute('aria-hidden',!f);
+    back.querySelectorAll('a,button').forEach(el=>el.tabIndex=f?0:-1); if(f) back.querySelector('.flip-back').focus({preventScroll:true}); else front.focus({preventScroll:true});};
+  front.addEventListener('click',()=>set(true));
+  back.addEventListener('click',e=>{ if(!e.target.closest('a')) set(false); });
 })();
 </script>
 </body>
