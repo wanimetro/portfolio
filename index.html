@@ -111,12 +111,12 @@ section{padding-block:clamp(64px,9vw,112px)}
 .xp{margin-top:clamp(56px,7vw,88px)}
 .xp-lead{max-width:60ch;color:var(--muted);margin:0 0 28px}
 .xp-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.xp-list li{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) auto;gap:8px 24px;padding:22px 0;border-bottom:1px solid var(--line)}
-@media (max-width:720px){.xp-list li{grid-template-columns:1fr}}
+.xp-list li{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) 150px;gap:8px 24px;padding:22px 0;border-bottom:1px solid var(--line)}
+@media (max-width:720px){.xp-list li{grid-template-columns:1fr}.xp-list .when{text-align:left}}
 .xp-list .org{font-family:var(--f-display);font-weight:600;font-size:19px;line-height:1.3}
 .xp-list .role{font-weight:500}
 .xp-list .desc{color:var(--muted);font-size:14.5px;margin-top:2px}
-.xp-list .when{font-family:var(--f-mono);font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.xp-list .when{text-align:right;font-family:var(--f-mono);font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .tbd{font-family:var(--f-mono);font-size:11px;color:var(--wip);border:1px dashed currentColor;border-radius:5px;padding:1px 6px;margin-left:6px;white-space:nowrap}
 
 /* skills */
@@ -230,17 +230,17 @@ dialog::backdrop{background:rgba(10,12,14,.55);backdrop-filter:blur(3px)}
           <li>
             <div class="org">XREAL 11th</div>
             <div><div class="role">XR Club Member</div><div class="desc">Building XR projects in Unity with the XR club.<span class="tbd">detail TBD</span></div></div>
-            <div class="when">2026 – Present</div>
+            <div class="when">Sep 2026 – Present</div>
           </li>
           <li>
             <div class="org">IT's TIME 10th</div>
             <div><div class="role">Frontend Developer</div><div class="desc">Built and launched 사계단지 as an Apps in Toss mini app with real users.</div></div>
-            <div class="when">2026</div>
+            <div class="when">Sep 2026 – Present</div>
           </li>
           <li>
             <div class="org">AWS Cloud Club</div>
             <div><div class="role">Backend Developer</div><div class="desc">Studied Spring and built authentication &amp; authorization for PLANFLOW.</div></div>
-            <div class="when">2026</div>
+            <div class="when">Mar – Aug 2026</div>
           </li>
           <li>
             <div class="org">EPITECH Paris</div>
@@ -250,7 +250,7 @@ dialog::backdrop{background:rgba(10,12,14,.55);backdrop-filter:blur(3px)}
           <li>
             <div class="org">Kyung Hee University</div>
             <div><div class="role">B.E. Computer Science &amp; Engineering</div><div class="desc">Double major in Immersive Media.</div></div>
-            <div class="when">Mar 2025 – Feb 2029 (exp.)</div>
+            <div class="when"></div>
           </li>
         </ul>
       </div>
