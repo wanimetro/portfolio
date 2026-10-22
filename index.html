@@ -58,8 +58,13 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .hero h1 em{font-style:normal;color:var(--accent)}
 .hero p.thesis{max-width:34ch;font-size:clamp(17px,2vw,21px);margin:28px 0 0;line-height:1.5}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) clamp(150px,15vw,200px);gap:clamp(24px,4vw,56px);align-items:center}
-.hero-photo{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;border:1px solid var(--line);box-shadow:0 16px 40px -20px rgba(0,0,0,.3);pointer-events:auto}
-@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-photo{order:-1;width:112px;border-radius:14px}}
+.hero-photo{position:relative;margin:0;padding:10px 10px 0;background:#fdfcf8;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 40px -18px rgba(0,0,0,.35);transform:rotate(4deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s;pointer-events:auto;justify-self:center}
+.hero-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:1px;filter:saturate(.92) contrast(1.02)}
+.hero-photo figcaption{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:#6b6b6b;text-align:center;padding:12px 0 14px}
+.hero-photo .tape{position:absolute;top:-12px;left:50%;width:76px;height:24px;transform:translateX(-50%) rotate(-5deg);background:color-mix(in srgb,var(--accent) 22%,#fff8);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.08);opacity:.85}
+.hero-photo:hover{transform:rotate(0deg) translateY(-6px) scale(1.03);box-shadow:0 1px 2px rgba(0,0,0,.08),0 28px 50px -20px rgba(0,0,0,.4)}
+@media (prefers-reduced-motion:reduce){.hero-photo,.hero-photo:hover{transition:none;transform:rotate(3deg)}}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-photo{order:-1;width:132px;justify-self:start;margin:8px 0 6px 6px;padding:7px 7px 0}.hero-photo figcaption{font-size:9px;padding:8px 0 9px}.hero-photo .tape{width:52px;height:18px;top:-9px}}
 .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;pointer-events:auto}
 .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
@@ -191,7 +196,7 @@ dialog::backdrop{background:rgba(10,12,14,.55);backdrop-filter:blur(3px)}
         <span class="chip">Kyung Hee University · CSE × Immersive Media</span>
       </div>
       </div>
-      <img class="hero-photo" src="img/profile.jpg" width="720" height="900" alt="Portrait of Sowon Oh" fetchpriority="high">
+      <figure class="hero-photo"><span class="tape" aria-hidden="true"></span><img src="img/profile.jpg" width="720" height="900" alt="Portrait of Sowon Oh" fetchpriority="high"><figcaption>sowon · seoul, 2026</figcaption></figure>
     </div>
     <span class="hint">move your cursor ↗</span>
   </section>
