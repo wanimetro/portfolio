@@ -13,12 +13,7 @@ Live: https://wanimetro.github.io/portfolio/
 
 ```
 img/sagye/cover.jpg  (+ screens.jpg)
-img/planflow/cover.png
-img/planflow/1-login.png
-img/planflow/2-dashboard.png
-img/planflow/3-ai-planning.png
-img/planflow/4-screen-spec.png
-img/planflow/5-wireframe.png
+img/planflow/cover.jpg (+ 1-login, 2-dashboard, 3-ai-planning, 4-screen-spec .jpg)
 img/lookitup/cover.jpg
 img/lookitup/results.jpg
 media/lookitup-demo.mp4           (YouTube 링크로 대체 가능)
