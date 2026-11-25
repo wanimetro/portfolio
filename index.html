@@ -468,6 +468,7 @@ const art = {
   lookitup:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><rect x="60" y="34" width="200" height="30" rx="15" fill="var(--surface)" stroke="var(--thumb-ink)"/><circle cx="80" cy="49" r="7" fill="none" stroke="var(--muted)" stroke-width="2"/><g fill="var(--surface)" stroke="var(--thumb-ink)"><rect x="60" y="80" width="96" height="86" rx="8"/><rect x="164" y="80" width="96" height="86" rx="8"/></g><g fill="var(--thumb-ink)"><rect x="72" y="96" width="60" height="4" rx="2"/><rect x="72" y="106" width="70" height="4" rx="2"/><rect x="176" y="96" width="60" height="4" rx="2"/><rect x="176" y="106" width="50" height="4" rx="2"/></g><path d="M74 142l8 8 16-16" stroke="var(--ok)" stroke-width="3" fill="none"/><path d="M178 142l8 8 16-16" stroke="var(--ok)" stroke-width="3" fill="none"/></svg>`,
   xreal:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g stroke="var(--thumb-ink)" stroke-width="1" fill="none"><path d="M0 200L160 110L320 200M40 200L160 110L280 200M80 200L160 110L240 200M120 200L160 110L200 200"/><path d="M45 165h230M80 145h160M110 128h100"/></g><circle cx="160" cy="70" r="26" fill="none" stroke="var(--glow)" stroke-width="2"/><circle cx="160" cy="70" r="6" fill="var(--glow)"/></svg>`,
   vr:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="var(--thumb-ink)" stroke-width="1.5"><path d="M130 70l40-20 40 20v50l-40 20-40-20z"/><path d="M130 70l40 20 40-20M170 90v50"/></g><rect x="70" y="120" width="90" height="44" rx="20" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="96" cy="142" r="9" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="134" cy="142" r="9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg>`,
+  petitparis:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="var(--thumb-ink)" stroke-width="1.5"><path d="M20 70V20h60v50M90 70V30h50v40M230 70V24h70v46"/><path d="M0 150h320"/><path d="M178 150V56c0-10 8-18 18-18h22c10 0 18 8 18 18v54c0 10 18 14 40 18 10 2 14 10 14 22z"/></g><ellipse cx="226" cy="156" rx="62" ry="7" fill="var(--thumb-ink)" opacity=".25"/><ellipse cx="226" cy="154" rx="72" ry="14" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 6"/><path d="M84 150l40-24 10 24z" fill="var(--glow)" stroke="var(--thumb-ink)"/><circle cx="104" cy="142" r="3" fill="var(--surface)"/><ellipse cx="44" cy="144" rx="16" ry="9" fill="var(--surface)" stroke="var(--thumb-ink)"/><circle cx="56" cy="136" r="5" fill="var(--surface)" stroke="var(--thumb-ink)"/><circle cx="60" cy="143" r="1.6" fill="var(--thumb-ink)"/><path d="M28 146c-10 2-14-4-18-10" stroke="var(--thumb-ink)" fill="none"/></svg>`,
   lab:`<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g fill="var(--thumb-ink)">${Array.from({length:6},(_,r)=>Array.from({length:9},(_,c)=>`<circle cx="${60+c*25}" cy="${45+r*22}" r="2"/>`).join('')).join('')}</g><g stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"><path d="M150 160v-50M165 160v-62M180 160v-56M195 160v-44"/><path d="M140 160c-6-10-14-18-20-24"/></g><circle cx="165" cy="92" r="6" fill="var(--glow)"/></svg>`
 };
 
@@ -476,7 +477,7 @@ const art = {
    비워둔 필드(빈 문자열/빈 배열)는 화면에 나오지 않아요.
 
    id        고유 키 (영문)
-   cat       카테고리 (첫 번째 값으로 그룹 배치): 'frontend' | 'backend' | 'planning'
+   cat       카테고리 (첫 번째 값으로 그룹 배치): 'xr' | 'frontend' | 'backend' | 'planning'
    title/en  제목 / 영문 부제
    year      기간 표기
    status    [라벨, ''|'wip'|'award']
@@ -487,6 +488,7 @@ const art = {
    team      팀 구성 (예: 'FE 2 · BE 2 · Design 1')
    role      내 역할
    stack     기술 스택
+   tools     개발 도구 (AI 도구 등, 선택)
    problem   어떤 문제를 풀었나 (1~2문장)
    points    내가 한 일 / 기술적 포인트 (3~4개)
    outcome   결과 (수상, 사용자 수, 배운 점…)
@@ -495,6 +497,20 @@ const art = {
    links     [{label:'GitHub', url:'...'}, ...]
    ─────────────────────────────────────────────────────────── */
 const projects = [
+  {id:'petitparis', cat:['xr'], title:'PETIT PARIS', en:'', year:'Nov 2026', art:'petitparis', cover:'img/petitparis/cover.jpg',
+   status:['Presented & demoed',''], tags:['VR Game','Unity · OpenXR','Meta Quest 2'],
+   short:'A first-person VR game where you become a rat with eyes 12 cm off the ground, dodging giant feet across Paris streets to reach the cheese on a bistro table.',
+   type:'Personal project', team:'Solo', role:'Game design · Unity development · On-device testing',
+   stack:'Unity 6 · C# · URP · OpenXR · XR Interaction Toolkit · Input System · Meta Quest Support', tools:'Claude Code · Unity MCP',
+   problem:'The idea started from how Paris looks through a small rat\'s eyes. On a flat screen that is just a low camera, but in VR you have to tilt your head up to see a person\'s face and footsteps land right above you, so the sense of scale is felt with the body. The challenge was making that tiny, fast, chased movement comfortable for first-time VR players, and getting it to run on a standalone Quest 2 without a PC.',
+   points:['Made the player rat-sized by scaling the tracking space to 0.1 in a real-size world, so a 10 cm head movement moves the rat 1 cm, with calibration that keeps eye height at 12 cm even when seated',
+           'Designed for comfort: the camera only follows head movement, with fades for respawns and falls, a vignette at speed, 30° snap turn and a Comfort Mode',
+           'Used distance checks instead of physics collisions for feet, bikes and brooms, so the player is never knocked back, since an unexpected camera jolt is a major cause of VR sickness',
+           'Built five stages from café terrace to bistro kitchen with footstep warnings, a spot-chase-hide loop, checkpoints and collectibles, and Touch controls including arm-swing running and haptics',
+           'Used Claude Code and Unity MCP to write and run code while making the calls on game direction and priorities myself, then tested on a real Quest 2 and fixed what only showed up in the headset: missed dash input, flickering on the bike lane, too few hiding spots and near-silent audio'],
+   outcome:'Finished a game that runs standalone on Quest 2 and presented it at my VR society, where members put on the headset and played it themselves. They said it was well made and described it as a soft, cozy game.',
+   video:'media/petitparis-demo.mp4', images:['img/petitparis/giant-feet.jpg','img/petitparis/hide.jpg','img/petitparis/tech-slide.jpg'],
+   links:[{label:'GitHub', url:'https://github.com/wanimetro/PetitParis'},{label:'VR demo (Meta Horizon)', url:'https://horizon.meta.com/shares/x5qZYpVxV85PV2MC4BJifPEfRLSYcm/?hwsh=qobEF5vwC5'},{label:'Presentation (PDF)', url:'media/petitparis-presentation.pdf'}]},
   {id:'garden', cat:['frontend'], title:'사계단지', en:'', year:'Sep 2026 –', art:'garden', cover:'img/sagye/cover.jpg',
    status:['Live · Apps in Toss',''], tags:["IT's TIME 10th",'Apps in Toss','React · TypeScript'],
    short:'A Toss mini app that suggests one seasonal moment to try each day and keeps your photos of it in a jar for each season. Now live with real users.',
@@ -548,6 +564,7 @@ const en = p => p.en ? `<span class="en">${p.en}</span>` : '';
 const SPARK='<svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5 11 12 12-7 .9-11.4 5.4-12 12-.6-6.6-5-11.1-12-12C7 11 11.4 6.4 12 0z"/></svg>';
 /* Category groups — a project appears under the first group whose key is in its cat */
 const GROUPS = [
+  {key:'xr',       name:'XR',       sub:'Immersive experiences in VR.'},
   {key:'frontend', name:'Frontend', sub:'Product UI shipped to real users.'},
   {key:'backend',  name:'Backend',  sub:'APIs, data and authentication.'},
   {key:'planning', name:'Planning', sub:'From problem definition to MVP.'}
@@ -584,7 +601,7 @@ grid.addEventListener('click',e=>{
     ${p.video ? '' : thumb(p)}${media ? `<div class="media">${media}</div>` : ''}
     <div><div class="label">${p.year}</div><h3 id="dlg-title">${p.title}${p.en?` <span style="color:var(--muted);font-weight:400">${p.en}</span>`:''}</h3></div>
     <p style="margin:0">${p.short}</p>
-    <dl>${row('Type',p.type)}${row('Team',p.team)}${row('Role',p.role)}${row(p.stackLabel||'Stack',p.stack)}</dl>
+    <dl>${row('Type',p.type)}${row('Team',p.team)}${row('Role',p.role)}${row(p.stackLabel||'Stack',p.stack)}${row('Tools',p.tools)}</dl>
     ${p.problem ? `<div><div class="label" style="margin-bottom:8px">Problem</div><p style="margin:0">${p.problem}</p></div>` : ''}
     ${p.points?.length ? `<div><div class="label" style="margin-bottom:8px">What I did</div><ul>${p.points.map(x=>`<li>${x}</li>`).join('')}</ul></div>` : ''}
     ${p.outcome ? `<div><div class="label" style="margin-bottom:8px">Outcome</div><p style="margin:0">${p.outcome}</p></div>` : ''}
