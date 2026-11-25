@@ -16,7 +16,9 @@ img/sagye/cover.jpg  (+ screens.jpg)
 img/planflow/cover.jpg (+ 1-login, 2-dashboard, 3-ai-planning, 4-screen-spec .jpg)
 img/lookitup/cover.jpg
 img/lookitup/results.jpg
-img/petitparis/cover.jpg  (+ 플레이 스크린샷)
+img/petitparis/cover.jpg (+ giant-feet, hide, tech-slide .jpg)
+media/petitparis-demo.mp4
+media/petitparis-presentation.pdf
 media/lookitup-demo.mp4           (YouTube 링크로 대체 가능)
 media/lookitup-presentation.pdf
 ```
